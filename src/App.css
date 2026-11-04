@@ -1,0 +1,27 @@
+.container {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.fetch-button {
+  padding: 8px 16px;
+  font-size: 1rem;
+  cursor: pointer;
+  background-color: #320e52;
+  color: white;
+}
+
+.content-area {
+  margin-top: 20px;
+}
+
+.error-message {
+  color: red;
+}
+
+.fact-box {
+  background-color: #f4f4f4;
+  padding: 15px;
+  border-radius: 5px;
+  color:#320e52
+}
