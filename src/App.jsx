@@ -27,41 +27,32 @@ function factReducer(state, action) {
 function App() {
   const [state, dispatch] = useReducer(factReducer, initialState);
 
-  // Button fetch request
-  const handleGetCatFact = async () => {
-    dispatch({ type: 'FETCH_START' });
-    try {
-      const response = await fetch('https://catfact.ninja/fact');
-      if (!response.ok) {
-        throw new Error('Failed to fetch cat fact');
-      }
-      const data = await response.json();
-      // fact data from API
-      dispatch({ type: 'FETCH_SUCCESS', payload: data.fact });
-    } catch (err) {
-      dispatch({ type: 'FETCH_ERROR', payload: err.message });
-    }
-  };
-
   return (
-    <div className="container">
+    <div  className="container">
       <h1>Cat Fact Generator</h1>
       
-      <button onClick={handleGetCatFact} className="fetch-button">
+      <button onClick={() =>
+      {dispatch({ type: 'FETCH_START' });
+        fetch('https://catfact.ninja/fact')
+        .then(res => res.json())
+        .then(data => dispatch
+          ({ type: 'FETCH_SUCCESS', payload: data.fact }))
+        .catch(err => dispatch
+          ({ type: 'FETCH_ERROR', payload: err.message }));
+      }} className="fetch-button"> {/* css button syles */}
         Get Cat Fact
       </button>
 
       <div className="content-area">
         {state.loading && <p>Loading...</p>}
-        
         {state.error && <p className="error-message">Error: {state.error}</p>}
-        
         {state.fact && (
           <div className="fact-box">
             <strong>Cat Fact:</strong> {state.fact}
           </div>
         )}
       </div>
+    
     </div>
   );
 }
